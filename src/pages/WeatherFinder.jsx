@@ -18,6 +18,7 @@ const WeatherDisplay = () => {
   const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(false);
   const [quote, setQuote] = useState(null);
+  const [error, setError] = useState(null);
 
   // Open-Meteo weather code mapping
   const weatherCodes = {
@@ -54,6 +55,7 @@ const WeatherDisplay = () => {
       );
       if (!geoRes.data.length) {
         throw new Error("City not found");
+       
       }
       const lat = geoRes.data[0].lat;
       const lon = geoRes.data[0].lon;
@@ -97,8 +99,9 @@ const WeatherDisplay = () => {
       );
 
       setQuote(getQuote(res.data.current_weather, res.data.hourly));
+      setError(null);
     } catch (error) {
-      console.error(error);
+       setError("City not found. Please try again.");
       setWeather(null);
       setForecast(null);
       setQuote("Couldn't fetch weather... maybe the clouds ate the signal!");
@@ -129,7 +132,7 @@ const WeatherDisplay = () => {
     clear: "linear-gradient(to bottom right, #facc15, #f97316, #dc2626)",
     clouds: "linear-gradient(to bottom right, #6b7280, #111827, #000000)",
     rain: "linear-gradient(to bottom right, #1e40af, #1e3a8a, #000000)",
-    fog: "linear-gradient(to bottom right, #e0f2fe, #ffffff, #bae6fd)",
+    snow: "linear-gradient(to bottom right, #e0f2fe, #ffffff, #bae6fd)",
     thunderstorm: "linear-gradient(to bottom right, #312e81, #4c1d95, #000000)",
     default: "linear-gradient(to bottom right, #111827, #1f2937, #000000)",
   };
@@ -225,6 +228,7 @@ const WeatherDisplay = () => {
           />
         </motion.div>
         {loading && <p className="text-gray-300 text-2xl my-4">Fetching weather...</p>}
+        {error && <p className="text-red-400 text-2xl my-4">{error}</p>}
 
         {/* Weather Info */}
         {!weather ? (
