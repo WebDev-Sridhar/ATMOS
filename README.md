@@ -1,12 +1,60 @@
-# React + Vite
+# 🌤️ ATMOS – Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ATMOS is a simple and elegant weather application built with **React (Vite)**.  
+It fetches live weather data from the **Open-Meteo API** and displays the current conditions with dynamic backgrounds and smooth UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+- 🔍 Search weather by city name
+- 🌦️ Real-time weather data using Open-Meteo API
+- 🎨 Dynamic gradient backgrounds based on weather conditions
+- 📱 Responsive design for desktop and mobile
+- ⚡ Built with Vite for blazing-fast performance
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+- **React (Vite)**
+- **Open-Meteo API**
+- **Tailwind CSS** for styling
+- **Vercel** for deployment
+
+---
+
+## 🚀 Live Demo
+👉 [Click here to try ATMOS](https://atmos-alpha.vercel.app)  
+
+---
+
+
+## 🙌 Acknowledgements
+- Weather data powered by [Open-Meteo API](https://open-meteo.com/)
+- Inspired by clean and minimal weather apps
+
+## 🧑‍💻 Author
+**Sridhar T**  
+📍 Madurai, India  
+🔗 [GitHub](https://github.com/WebDev-Sridhar) | [Portfolio](https://webdev-sridhar.github.io/Portfolio-Website/)
+
+## 📂 Installation & Setup
+Clone the repo and run locally:
+
+```bash
+# Clone repository
+git clone https://github.com/WebDev-Sridhar/ATMOS.git
+
+# Go inside the project folder
+cd ATMOS
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+
+
+
+
+
