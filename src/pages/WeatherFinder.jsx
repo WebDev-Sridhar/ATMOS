@@ -22,10 +22,10 @@ const WeatherDisplay = () => {
 
   // Open-Meteo weather code mapping
   const weatherCodes = {
-    0: "Clear",
+    0: "Clear sky",
     1: "Mainly clear",
     2: "Partly cloudy",
-    3: "cloud",
+    3: "Overcast",
     45: "Fog",
     48: "Rime fog",
     51: "Light drizzle",
@@ -33,10 +33,10 @@ const WeatherDisplay = () => {
     55: "Dense drizzle",
     61: "Slight rain",
     63: "Moderate rain",
-    65: "rain",
+    65: "Heavy rain",
     71: "Slight snow",
     73: "Moderate snow",
-    75: "snow",
+    75: "Heavy snow",
     80: "Rain showers",
     81: "Moderate showers",
     82: "Violent showers",
@@ -55,6 +55,7 @@ const WeatherDisplay = () => {
       );
       if (!geoRes.data.length) {
         throw new Error("City not found");
+      
        
       }
       const lat = geoRes.data[0].lat;
@@ -100,9 +101,14 @@ const WeatherDisplay = () => {
 
       setQuote(getQuote(res.data.current_weather, res.data.hourly));
       setError(null);
-    } catch (error) {
-       setError("City not found. Please try again.");
-      setWeather(null);
+    } catch (Error) {     
+    if (Error.message === "City not found") {
+         setError("City not found. Please try again.");
+         
+    } else {
+         setError("Something went wrong. Please try later.");
+     }
+      setWeather(null); 
       setForecast(null);
       setQuote("Couldn't fetch weather... maybe the clouds ate the signal!");
     }
@@ -129,17 +135,33 @@ const WeatherDisplay = () => {
   };
 
   const gradientMap = {
-    clear: "linear-gradient(to bottom right, #facc15, #f97316, #dc2626)",
-    clouds: "linear-gradient(to bottom right, #6b7280, #111827, #000000)",
-    rain: "linear-gradient(to bottom right, #1e40af, #1e3a8a, #000000)",
-    snow: "linear-gradient(to bottom right, #e0f2fe, #ffffff, #bae6fd)",
-    thunderstorm: "linear-gradient(to bottom right, #312e81, #4c1d95, #000000)",
-    default: "linear-gradient(to bottom right, #111827, #1f2937, #000000)",
+"Clear sky": "linear-gradient(to bottom right, #f59e0b, #d97706, #b45309)",
+  "Mainly clear": "linear-gradient(to bottom right, #fbbf24, #d97706, #92400e)",
+  "Partly cloudy": "linear-gradient(to bottom right, #60a5fa, #3b82f6, #1e40af)",
+  "Overcast": "linear-gradient(to bottom right, #4b5563, #374151, #1f2937)",
+  "Fog": "linear-gradient(to bottom right, #6b7280, #4b5563, #374151)",
+  "Rime fog": "linear-gradient(to bottom right, #94a3b8, #64748b, #475569)",
+  "Light drizzle": "linear-gradient(to bottom right, #38bdf8, #0ea5e9, #0369a1)",
+  "Moderate drizzle": "linear-gradient(to bottom right, #3b82f6, #2563eb, #1e3a8a)",
+  "Dense drizzle": "linear-gradient(to bottom right, #475569, #334155, #1e293b)",
+  "Slight rain": "linear-gradient(to bottom right, #2563eb, #1d4ed8, #1e3a8a)",
+  "Moderate rain": "linear-gradient(to bottom right, #1e40af, #1e3a8a, #172554)",
+  "Heavy rain": "linear-gradient(to bottom right, #1e3a8a, #172554, #0f172a)",
+  "Slight snow": "linear-gradient(to bottom right, #64748b, #475569, #334155)",
+  "Moderate snow": "linear-gradient(to bottom right, #475569, #334155, #1e293b)",
+  "Heavy snow": "linear-gradient(to bottom right, #334155, #1e293b, #0f172a)",
+  "Rain showers": "linear-gradient(to bottom right, #2563eb, #1d4ed8, #1e40af)",
+  "Moderate showers": "linear-gradient(to bottom right, #1e40af, #1e3a8a, #172554)",
+  "Violent showers": "linear-gradient(to bottom right, #1e3a8a, #172554, #0f172a)",
+  "Thunderstorm": "linear-gradient(to bottom right, #4338ca, #312e81, #1e1b4b)",
+  "Thunderstorm with hail": "linear-gradient(to bottom right, #3730a3, #312e81, #1e1b4b)",
+  "Thunderstorm with heavy hail": "linear-gradient(to bottom right, #312e81, #1e1b4b, #111827)",
+     default: "linear-gradient(to bottom right, #111827, #1f2937, #000000)",
   };
 
   const bgStyle = {
     backgroundImage:
-      gradientMap[weather ? weather.weather[0].main.toLowerCase() : "default"] ||
+      gradientMap[weather ? weather.weather[0].main : "default" ] ||
       gradientMap.default,
   };
 
