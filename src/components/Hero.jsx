@@ -1,3 +1,4 @@
+import React from "react";
 const Hero = () => {
   return (
     <section className="relative w-full h-[40vh] flex items-center justify-center  text-white overflow-hidden">
