@@ -170,7 +170,7 @@ const WeatherDisplay = () => {
     const temp = current.temperature.toFixed(1);
     const humidity = hourly.relative_humidity_2m[0];
     const main =
-      weatherCodes[current.weathercode]?.toLowerCase() || "weather vibes";
+      weatherCodes[current.weathercode] || "weather vibes";
 
     const rainyQuotes = [
       `☔ It's raining here with ${humidity}% humidity. Perfect time for chai & Ilaiyaraaja 🎶.`,
@@ -199,9 +199,12 @@ const WeatherDisplay = () => {
     ];
 
     if (main.includes("rain")) return rainyQuotes[Math.floor(Math.random() * rainyQuotes.length)];
+    if (main.includes("showers")) return rainyQuotes[Math.floor(Math.random() * rainyQuotes.length)];
     if (main.includes("cloud")) return cloudyQuotes[Math.floor(Math.random() * cloudyQuotes.length)];
+    if (main.includes("Overcast")) return cloudyQuotes[Math.floor(Math.random() * cloudyQuotes.length)];
+    if (main.includes("Fog")) return cloudyQuotes[Math.floor(Math.random() * cloudyQuotes.length)];
     if (main.includes("clear")) return clearQuotes[Math.floor(Math.random() * clearQuotes.length)];
-    if (main.includes("thunder")) return thunderQuotes[Math.floor(Math.random() * thunderQuotes.length)];
+    if (main.includes("Thunderstorm")) return thunderQuotes[Math.floor(Math.random() * thunderQuotes.length)];
     if (main.includes("snow")) return snowQuotes[Math.floor(Math.random() * snowQuotes.length)];
 
     return `🌍 Weather looks like ${main} with ${temp}°C. Just roll with it! 😎.`;
@@ -212,11 +215,33 @@ const WeatherDisplay = () => {
     const rainy = forecast.some((f) =>
       f.weather[0].description.toLowerCase().includes("rain")
     );
-    if (rainy) return "Looks like it might rain for the next few hours 🌧️. Keep an umbrella handy!";
+    if (rainy) {
+      return "Looks like it might rain for the next few hours 🌧️. Keep an umbrella handy!";
+    }
     const clear = forecast.some((f) =>
       f.weather[0].description.toLowerCase().includes("clear")
     );
-    if (clear) return "The skies may clear up in the next few hours ☀️.";
+    if (clear) {
+      return "The skies may clear up in the next few hours ☀️.";
+    }
+    const cloudy = forecast.some((f) =>
+      f.weather[0].description.toLowerCase().includes("overcast")
+    );
+    if (cloudy) {
+      return "It's going to be cloudy for the next few hours ☁️.";
+    }
+    const snowy = forecast.some((f) =>
+      f.weather[0].description.toLowerCase().includes("snow")
+    );
+    if (snowy) {
+      return "Snow is expected in the next few hours ❄️. Stay warm!";
+    }
+    const stormy = forecast.some((f) =>
+      f.weather[0].description.toLowerCase().includes("thunderstorm")
+    );
+    if (stormy) {
+      return "Thunderstorms may occur in the next few hours ⚡. Stay safe!";
+    }
     return "The weather is unpredictable! Stay ready for anything.";
   };
 
