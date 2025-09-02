@@ -1,7 +1,7 @@
 import React from "react";
 const Hero = () => {
   return (
-    <section className=" w-full  flex items-center justify-center  text-white overflow-hidden my-10">
+    <section className=" w-full  flex flex-col items-center justify-center  text-white overflow-hidden my-10">
 
 
       {/* Title */}
@@ -13,7 +13,7 @@ const Hero = () => {
 </h1>
 
       {/* Tagline */}
-      <p className="absolute bottom-14 text-gray-300 text-lg md:text-xl tracking-wide animate-fadeIn">
+      <p className=" bottom-14 text-gray-300 text-lg md:text-xl tracking-wide animate-fadeIn my-2">
         Your Futuristic Weather Companion
       </p>
     </section>
